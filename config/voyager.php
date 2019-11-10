@@ -144,7 +144,10 @@ return [
         ],
 
         'widgets' => [
-
+            'App\\Widgets\\CustomerDimmer',
+            'App\\Widgets\\FixedDimmer',
+            // 'App\\Widgets\\InvoiceDimmer',
+            // 'App\\Widgets\\EmployeeDimmer'
         ],
 
     ],
@@ -181,7 +184,7 @@ return [
     |
     */
 
-    'primary_color' => '#2B50ED',
+    'primary_color' => '#00C853',
 
     'show_dev_tips' => true, // Show development tip "How To Use:" in Menu and Settings
 

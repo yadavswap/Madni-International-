@@ -28,12 +28,14 @@
             <span class="glyphicon glyphicon-list"></span>&nbsp;
             {{ __('voyager::generic.return_to_list') }}
         </a>
+
+        <a href="{{ url('admin/docket/invoice/'.$docket->id, []) }}" target="_blank" class="btn btn-info">Print Invoice</a>
     </h1>
     @include('voyager::multilingual.language-selector')
 @stop
 
 @section('content')
-    <div class="page-content read container-fluid">
+    <div class="page-content read container-fluid" id="print_view">
         <div class="row">
             <div class="col-md-12">
                 <div class="panel-group" id="accordion">
@@ -43,7 +45,7 @@
                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Docket Datails</a>
                             </h4>
                         </div>
-                        <div id="collapse1" class="panel-collapse collapse in">
+                        <div id="collapse" class="panel-collapse collapse in">
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-md-6">
@@ -97,7 +99,22 @@
                                                             <th>{{ $volumn->l }}</th>
                                                             <th>{{ $volumn->w }}</th>
                                                             <th>{{ $volumn->h }}</th>
-                                                            <th>{{ $volumn->final_weight }}</th>
+                                                            <th>
+                                                                @php
+                                                                    $weight = 0;
+                                                                    if($volumn->kg < 20 && $volumn->grams < 500){
+                                                                        $weight = $volumn->kg = $volumn->kg + 0;
+                                                                    }
+
+                                                                    if($volumn->kg > 20 && $volumn->grams > 500){
+                                                                        $weight = $volumn->kg = $volumn->kg + 1;
+                                                                    }
+
+                                                                    $lenght = ($volumn->l * $volumn->w * $volumn->h)/5000 ;
+
+                                                                @endphp
+                                                                {{ max($weight,$lenght) }}
+                                                            </th>
                                                         </tr>
                                                     @endforeach
                                                 </tbody>
@@ -114,7 +131,7 @@
                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Consignment Number (From (Collection Address))</a>
                             </h4>
                         </div>
-                        <div id="collapse2" class="panel-collapse collapse">
+                        <div id="collapse" class="panel-collapse collapse in">
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-md-6">
@@ -151,7 +168,7 @@
                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Consignment Number (To (Receiver Address))</a>
                             </h4>
                         </div>
-                        <div id="collapse3" class="panel-collapse collapse">
+                        <div id="collapse" class="panel-collapse collapse in">
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-md-6">
@@ -188,7 +205,7 @@
                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">Consignment Number (Deliver Address))</a>
                             </h4>
                         </div>
-                        <div id="collapse4" class="panel-collapse collapse">
+                        <div id="collapse" class="panel-collapse collapse in">
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-md-6">
@@ -269,6 +286,17 @@
                 : deleteFormAction + '/' + $(this).data('id');
 
             $('#delete_modal').modal('show');
+        });
+
+        $(document).ready(function(){
+            $("#print_page").click(function(){
+                var divToPrint = document.getElementById('print_view');
+                var newWindow = window.open('','Print-Window');
+                newWindow.document.open();
+                newWindow.document.write('<html><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"><body onload="window.print()">'+divToPrint.innerHTML+'</body></html>');
+                newWindow.document.close();
+                setTimeout(function(){newWindow.close();},10);
+            });
         });
 
     </script>

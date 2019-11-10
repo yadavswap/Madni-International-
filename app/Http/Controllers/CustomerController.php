@@ -10,4 +10,5 @@ class CustomerController extends Controller
         $customer = \App\Customer::find($request->id);
         return response()->json($customer);
     }
+    
 }

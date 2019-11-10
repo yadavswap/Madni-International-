@@ -18,4 +18,11 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
+    Route::get('import','PriceController@importIndex');
+    Route::post('price/import','PriceController@import');
+
+    Route::get('export','PriceController@importIndex');
+    Route::get('invoices','DocketController@invoices');
+    Route::get('docket/invoice/{docket_id}','InvoiceController@docketInvoice');
+    Route::post('invoices','DocketController@invoices');
 });

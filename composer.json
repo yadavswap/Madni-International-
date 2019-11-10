@@ -12,6 +12,9 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.0",
         "laravel/tinker": "^1.0",
+        "maatwebsite/excel": "^3.1",
+        "setasign/fpdf": "1.8.1",
+        "setasign/fpdi-fpdf": "^2.2",
         "tcg/voyager": "^1.2"
     },
     "require-dev": {

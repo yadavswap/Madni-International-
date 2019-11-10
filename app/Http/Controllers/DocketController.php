@@ -14,6 +14,22 @@ use TCG\Voyager\Http\Controllers\Traits\BreadRelationshipParser;
 
 class DocketController extends \TCG\Voyager\Http\Controllers\VoyagerBaseController
 {
+
+    public function invoices(Request $request){
+        if($request->method() === "POST"){
+            $customer_id = $request->get('customer_id');
+            // $docket = \App\Docket::find($docket_id);
+
+            $customers = \App\Customer::all();
+            $dockets = \App\Docket::where('sender_acc_no',$customer_id)->get();
+
+            return view('invoices',compact('customers','dockets'));
+        }else{
+            $customers = \App\Customer::all();
+            return view('invoices',compact('customers'));
+        }
+    }
+
        //***************************************
     //
     //                   /\
@@ -48,14 +64,17 @@ class DocketController extends \TCG\Voyager\Http\Controllers\VoyagerBaseControll
         }
 
         //Custom Code
-
         $customers = \App\Customer::get();
+
+        //generate consignment number
+        $consignment_no = "MD78692".str_pad(\App\Docket::count()+1,5, '0', STR_PAD_LEFT);
 
         return Voyager::view($view, compact(
             'dataType',
             'dataTypeContent',
             'isModelTranslatable',
-            'customers'
+            'customers',
+            'consignment_no'
         ));
     }
 
@@ -85,7 +104,8 @@ class DocketController extends \TCG\Voyager\Http\Controllers\VoyagerBaseControll
         
 
         $receiverAddress = new \App\ReceiverAddress;
-        $receiverAddress->cust_id = $request->receiver_id;
+        // $receiverAddress->cust_id = $request->receiver_id;
+        $receiverAddress->zone = $request->receiver_zone;
         $receiverAddress->name = $request->receiver_name;
         $receiverAddress->address = $request->receiver_address;
         $receiverAddress->city = $request->receiver_city;
@@ -98,7 +118,8 @@ class DocketController extends \TCG\Voyager\Http\Controllers\VoyagerBaseControll
         $receiverAddress->save();
 
         $deliveryAddress = new \App\DeliveryAddress;
-        $deliveryAddress->cust_id = $request->delivery_id;
+        // $deliveryAddress->cust_id = $request->delivery_id;
+        $deliveryAddress->zone = $request->delivery_zone;
         $deliveryAddress->name = $request->delivery_name;
         $deliveryAddress->address = $request->delivery_address;
         $deliveryAddress->city = $request->delivery_city;

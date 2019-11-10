@@ -17,4 +17,8 @@ class Docket extends Model
     public function deliveryAddress(){
         return $this->belongsTo('App\DeliveryAddress');
     }
+
+    public function volumns(){
+        return $this->hasMany('\App\Volumn');
+    }
 }
