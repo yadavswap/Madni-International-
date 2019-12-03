@@ -25,7 +25,13 @@ class PriceController extends Controller
     }
 
     public function import(Request $request){
-        Excel::import(new PricesImport, request()->file('file'));
+        // Excel::import(new PricesImport, request()->file('file'));
+        $path = $request->file('file')->storeAs('price','imports.xlsx');
+        return redirect('admin/prices')->with('status','price list added successfully');
+    }
+
+    public function download(){
+        return \Storage::download('price/imports.xlsx');
     }
 
     public function import2(Request $request){

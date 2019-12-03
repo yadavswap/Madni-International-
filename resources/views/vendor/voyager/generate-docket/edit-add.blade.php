@@ -96,9 +96,9 @@
                                         <label for="sender_country">Sender Country</label>
                                         <input type="text" name="sender_country" id="sender_country" class="form-control" required>
                                     </div>
-                                    <div class="form-group col-md-6">
+                                    {{-- <div class="form-group col-md-6">
                                         <button type="button" class="btn btn-primary btn-block" id="sender_button">Next</button>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -108,7 +108,7 @@
                                     <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Consignment Number (To (Reciver Address))</a>
                                 </h4>
                             </div>
-                            <div id="collapse2" class="panel-collapse collapse">
+                            <div id="collapse2" class="panel-collapse collapse in">
                                 <div class="panel-body">
                                     {{-- <div class="form-group col-md-12">
                                         <label for="receiver_id">Select Customer</label>
@@ -129,48 +129,48 @@
                                         </select>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="receiver_name">Receiver Name</label>
+                                        <label for="receiver_name">Name</label>
                                         <input type="text" name="receiver_name" id="receiver_name" class="form-control" required>
                                     </div>
                                     <div class="form-group col-md-6">
-                                            <label for="receiver_email">Receiver Email</label>
+                                            <label for="receiver_email">Email</label>
                                             <input type="email" name="receiver_email" id="receiver_email" class="form-control" required>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="receiver_phone">Receiver Phone</label>
+                                            <label for="receiver_phone">Phone</label>
                                             <input type="text" name="receiver_phone" id="receiver_phone" class="form-control" required>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="receiver_gstin">Receiver GSTIN</label>
+                                            <label for="receiver_gstin">GSTIN</label>
                                             <input type="text" name="receiver_gstin" id="receiver_gstin" class="form-control" required>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="receiver_kindattn">Receiver Kind Attn</label>
+                                            <label for="receiver_kindattn">Kind Attn</label>
                                             <input type="text" name="receiver_kindattn" id="receiver_kindattn" class="form-control" required>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="receiver_pin">Receiver Pin</label>
+                                            <label for="receiver_pin">Pin</label>
                                             <input type="text" name="receiver_pin" id="receiver_pin" class="form-control" required>
                                         </div>
                                         <div class="form-group col-md-12">
-                                            <label for="receiver_address">Receiver Address</label>
+                                            <label for="receiver_address">Address</label>
                                             <textarea type="text" name="receiver_address" id="receiver_address" class="form-control" required></textarea>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="receiver_city">Receiver City</label>
+                                            <label for="receiver_city">City</label>
                                             <input type="text" name="receiver_city" id="receiver_city" class="form-control" required>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="receiver_state">Receiver State</label>
+                                            <label for="receiver_state">State</label>
                                             <input type="text" name="receiver_state" id="receiver_state" class="form-control" required>
                                         </div>
                                         <div class="form-group col-md-12">
-                                            <label for="receiver_country">Receiver Country</label>
+                                            <label for="receiver_country">Country</label>
                                             <input type="text" name="receiver_country" id="receiver_country" class="form-control" required>
                                         </div>
-                                        <div class="form-group col-md-6">
+                                        {{-- <div class="form-group col-md-6">
                                             <button type="button" class="btn btn-primary btn-block" id="receiver_button">Next</button>
-                                        </div>
+                                        </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -180,7 +180,7 @@
                                     <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Consignment Number (Deliver Address))</a>
                                 </h4>
                             </div>
-                            <div id="collapse3" class="panel-collapse collapse">
+                            <div id="collapse3" class="panel-collapse collapse in">
                                 <div class="panel-body">
                                     {{-- <div class="form-group col-md-12">
                                         <label for="delivery_id">Select Customer</label>
@@ -201,48 +201,48 @@
                                         </select>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="delivery_name">Delivery Name</label>
+                                        <label for="delivery_name">Name</label>
                                         <input type="text" name="delivery_name" id="delivery_name" class="form-control" required>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="delivery_email">Delivery Email</label>
+                                        <label for="delivery_email">Email</label>
                                         <input type="email" name="delivery_email" id="delivery_email" class="form-control" required>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="delivery_phone">Delivery Phone</label>
+                                        <label for="delivery_phone">Phone</label>
                                         <input type="text" name="delivery_phone" id="delivery_phone" class="form-control" required>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="delivery_gstin">Delivery GSTIN</label>
+                                        <label for="delivery_gstin">GSTIN</label>
                                         <input type="text" name="delivery_gstin" id="delivery_gstin" class="form-control" required>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="delivery_kindattn">Delivery Kind Attn</label>
+                                        <label for="delivery_kindattn">Kind Attn</label>
                                         <input type="text" name="delivery_kindattn" id="delivery_kindattn" class="form-control" required>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="delivery_pin">Delivery Pin</label>
+                                        <label for="delivery_pin">Pin</label>
                                         <input type="text" name="delivery_pin" id="delivery_pin" class="form-control" required>
                                     </div>
                                     <div class="form-group col-md-12">
-                                        <label for="delivery_address">Delivery Address</label>
+                                        <label for="delivery_address">Address</label>
                                         <textarea type="text" name="delivery_address" id="delivery_address" class="form-control" required></textarea>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="delivery_city">Delivery City</label>
+                                        <label for="delivery_city">City</label>
                                         <input type="text" name="delivery_city" id="delivery_city" class="form-control" required>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="delivery_state">Delivery State</label>
+                                        <label for="delivery_state">State</label>
                                         <input type="text" name="delivery_state" id="delivery_state" class="form-control" required>
                                     </div>
                                     <div class="form-group col-md-12">
-                                        <label for="delivery_country">Delivery Country</label>
+                                        <label for="delivery_country">Country</label>
                                         <input type="text" name="delivery_country" id="delivery_country" class="form-control" required>
                                     </div>
-                                    <div class="form-group col-md-6">
+                                    {{-- <div class="form-group col-md-6">
                                         <button type="button" class="btn btn-primary btn-block" id="delivery_button">Next</button>
-                                    </div>  
+                                    </div>   --}}
                                 </div>
                             </div>
                         </div>
@@ -253,7 +253,7 @@
                                     <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">Final Docket</a>
                                 </h4>
                             </div>
-                            <div id="collapse4" class="panel-collapse collapse">
+                            <div id="collapse4" class="panel-collapse collapse in">
                                 <div class="panel-body">
                                     <div class="form-group col-md-6">
                                         <label for="sender_acc_no">Sender Account No</label>
@@ -271,16 +271,13 @@
                                         <label for="service">Select Service</label>
                                         <select class="form-control select2" name="service" id="service">
                                             <option value="" selected disabled>Select Customer</option>
-                                            <option>Doc Special Express</option>
-                                            <option>Doc 9:00 Express</option>
-                                            <option>Doc 10:00 Express</option>
-                                            <option>Doc Express</option>
-                                            <option>Doc Economy Express</option>
-                                            <option>Non-Doc Special Express</option>
-                                            <option>Non-Doc 9:00 Express</option>
-                                            <option>Non-Doc 10:00 Express</option>
-                                            <option>Non-Doc Express</option>
-                                            <option>Non-Doc Economy Express</option>
+                                            <option>Express</option>
+                                            <option>Economy</option>
+                                            <option>Cargo</option>
+                                            <option>D to D</option>
+                                            <option>D to P</option>
+                                            <option>P to P</option>
+                                            <option>P to D</option>
                                         </select>
                                     </div>
                                     <div class="col-md-12">
@@ -469,7 +466,7 @@
             //custome codes
             $("#sender_id").change(function(){
                 $.ajax({
-                    url: "/api/customers",
+                    url: "{{ url('/api/customers') }}",
                     type: "POST",
                     data: {
                         "id" : $(this).val()
@@ -477,8 +474,8 @@
                     success: function(response){
                         console.log(response);
                         var senderId = pad(response.id,5);
-                        $("#sender_id_gen").val("MD78692"+senderId);
-                        $("#sender_acc_no").val("MD78692"+senderId);
+                        $("#sender_id_gen").val("MI78692"+senderId);
+                        $("#sender_acc_no").val("MI78692"+senderId);
                         $("#sender_name").val(response.name);
                         $("#sender_email").val(response.email);
                         $("#sender_phone").val(response.phone);
@@ -495,7 +492,7 @@
 
             $("#receiver_id").change(function(){
                 $.ajax({
-                    url: "/api/customers",
+                    url: "{{ url('/api/customers') }}",
                     type: "POST",
                     data: {
                         "id" : $(this).val()
@@ -518,7 +515,7 @@
 
             $("#delivery_id").change(function(){
                 $.ajax({
-                    url: "/api/customers",
+                    url: "{{ url('/api/customers') }}",
                     type: "POST",
                     data: {
                         "id" : $(this).val()

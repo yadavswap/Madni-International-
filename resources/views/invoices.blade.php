@@ -23,8 +23,8 @@
                 <select class="form-control select2" name="customer_id" id="customer_id" onchange="this.form.submit()">
                     <option value="" selected disabled>Select Customer Id</option>
                     @foreach ($customers as $customer)
-                    <option value="{{ "MD78692".str_pad($customer->id,5, '0', STR_PAD_LEFT) }}">
-                        {{ "MD78692".str_pad($customer->id,5, '0', STR_PAD_LEFT) }}</option>
+                    <option value="{{ "MI78692".str_pad($customer->id,5, '0', STR_PAD_LEFT) }}">
+                        {{ "MI78692".str_pad($customer->id,5, '0', STR_PAD_LEFT) }}</option>
                     @endforeach
                 </select>
             </form>

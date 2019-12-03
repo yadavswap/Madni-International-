@@ -9,6 +9,7 @@ class PricesImport implements WithMultipleSheets
 {
     public function sheets(): array
     {
+        \App\Price::truncate();
         return [
             new FedexExportSheetImport(),
             new FedexImportSheetImport(),

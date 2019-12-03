@@ -67,7 +67,7 @@ class DocketController extends \TCG\Voyager\Http\Controllers\VoyagerBaseControll
         $customers = \App\Customer::get();
 
         //generate consignment number
-        $consignment_no = "MD78692".str_pad(\App\Docket::count()+1,5, '0', STR_PAD_LEFT);
+        $consignment_no = "MI78692".str_pad(\App\Docket::count()+1,5, '0', STR_PAD_LEFT);
 
         return Voyager::view($view, compact(
             'dataType',
