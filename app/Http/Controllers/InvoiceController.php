@@ -29,6 +29,7 @@ class InvoiceController extends \TCG\Voyager\Http\Controllers\VoyagerBaseControl
      */
     public function store(Request $request)
     {
+        dd($request);
         $slug = $this->getSlug($request);
 
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
@@ -39,7 +40,6 @@ class InvoiceController extends \TCG\Voyager\Http\Controllers\VoyagerBaseControl
         // Validate fields with ajax
         $val = $this->validateBread($request->all(), $dataType->addRows)->validate();
         $data = $this->insertUpdateData($request, $slug, $dataType->addRows, new $dataType->model_name());
-
 
         event(new BreadDataAdded($dataType, $data));
 
@@ -69,9 +69,44 @@ class InvoiceController extends \TCG\Voyager\Http\Controllers\VoyagerBaseControl
         $tpl = $pdf->importPage(1);
         $pdf->AddPage();
         $pdf->useTemplate($tpl);
-        $pdf->SetFont('Arial','B',9);
+        $pdf->SetFont('Arial','B',8);
 
-        $pdf->Text(42,73.2,$customer->name);
+        $pdf->setXY(42,71);
+        $pdf->Multicell(0,3,$customer->name."\n".$customer->city.", ".$customer->state." ".$customer->pincode."\n".$customer->country);
+        $pdf->Text(150,74.1,"MI78692".str_pad($customer->id,5, '0', STR_PAD_LEFT));
+        $pdf->Text(150,77.4,"MI78692".str_pad($invoice->id,5, '0', STR_PAD_LEFT));
+
+        $pdf->SetFont('Arial','',8);
+        $pdf->Text(42,87.6,$customer->phone);
+        $pdf->Text(42,90.7,$customer->email);
+        $pdf->Text(43,93.9,$customer->kind_attn);
+        $pdf->Text(43,97.5,$customer->gstin);
+        $pdf->Text(47,101,$invoice->state_code);
+
+        $pdf->Text(150,80.8,$invoice->invoice_date);
+
+        $pdf->SetFont('Arial','',7);
+        $pdf->Text(193,153,$invoice->gross_amount);
+        $pdf->Text(193,156.7,$invoice->fuel_surcharge_index);
+        $pdf->Text(193,159.8,$invoice->custom_clearance);
+        $pdf->Text(193,163.2,$invoice->oda_charges);
+        $pdf->Text(193,166.7,$invoice->adc_noc_charges);
+        $pdf->Text(193,170,$invoice->do_charges);
+        $pdf->Text(193,173.5,$invoice->non_conveyar_charges);
+        $pdf->Text(193,176.5,$invoice->address_correction_charges);
+        $pdf->Text(193,179.8,$invoice->war_surcharges);
+        $pdf->Text(193,182.8,$invoice->warehousing_charges);
+        $pdf->Text(193,185.8,$invoice->ad_code_registration_charges);
+        $pdf->Text(193,189.5,$invoice->air_cargo_registration_charges);
+        $pdf->Text(193,192.9,$invoice->enhanced_security_charges);
+        $pdf->Text(193,196.5,$invoice->c_gst);
+        $pdf->Text(193,199.8,$invoice->s_gst);
+        $pdf->Text(193,203.8,$invoice->i_gst);
+        $pdf->Text(193,207.3,$invoice->freight_amount);
+        $pdf->Text(193,210.8,$invoice->duty_payment);
+
+        $pdf->SetFont('Arial','B',8);
+        $pdf->Text(193,218.2,$invoice->net_amount);
 
         $pdf->Output();
         

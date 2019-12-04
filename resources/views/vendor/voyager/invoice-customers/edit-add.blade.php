@@ -92,6 +92,7 @@
 
                             <button type="button" id="addrow" class="btn btn-success" >Add Row</button>
                             <button type="button" id="deleterow" class="btn btn-danger">Delete Row</button>
+                            <button type="button" id="calculate" class="btn btn-info">Calculate Amount</button>
 
                             <table class="table">
                                 <thead>
@@ -332,6 +333,22 @@
     <script>
         $(document).ready(function(){
 
+            //disabling input fields
+            $('input[name="net_amount"]').attr("readonly",true);
+            $('input[name="i_gst"]').attr("readonly",true);
+            $('input[name="s_gst"]').attr("readonly",true);
+            $('input[name="c_gst"]').attr("readonly",true);
+            $('input[name="fuel_surcharge_index"]').attr("readonly",true);
+            $('input[name="gross_amount"]').attr("readonly",true);
+
+            $('select[name="type"]').change(function(){
+                if($(this).find(":selected").val() == "import"){
+                    // $('input[name="i_gst"]').attr("disabled",true);
+                }else{
+
+                }
+            });
+
             $("#addrow").click(function(){
 
                 if($("#itembody .itemrow").length < 5){
@@ -340,7 +357,9 @@
                     var num = parseInt(consignment_id.prop("id").match(/\d+/g), 10) + 1;
 
                     var itemrow = $('#itemrow').clone();
+                    itemrow.find("input").val("");
                     itemrow.find(".consignment_no:last").attr("id","consignment_no"+num);
+                    itemrow.find(".consignment_no:last").attr("value","");
                     itemrow.find(".booking_date:last").attr("id","booking_date"+num);
                     itemrow.find(".origin:last").attr("id","origin"+num);
                     itemrow.find(".destination:last").attr("id","destination"+num);
@@ -360,6 +379,10 @@
                 if($("#itembody .itemrow").length > 1){
                     $(".itemrow:last").remove();
                 }
+            });
+
+            $("#calculate").click(function(){
+                
             });
         });
     </script>
