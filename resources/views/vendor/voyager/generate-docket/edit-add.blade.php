@@ -33,6 +33,7 @@
                 <!-- CSRF TOKEN -->
                 {{ csrf_field() }}
             <div class="row">
+                <div class="col-md-2"></div>
                 <div class="col-md-8 row">
                     <div class="panel-group" id="accordion">
                         <div class="panel panel-bordered" id="sender_panel">

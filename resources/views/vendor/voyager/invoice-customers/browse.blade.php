@@ -258,7 +258,7 @@
                                                     @include('voyager::bread.partials.actions', ['action' => $action])
                                                 @endif
                                             @endforeach
-                                            <a href="http://127.0.0.1:8000/admin/generate/invoice/{{ $data->id }}" title="Generate Invoice" class="btn btn-sm btn-success view"><span class="hidden-xs hidden-sm">Generate Invoice</span>
+                                            <a target="_blank" href="{{ url('admin/generate/invoice/'.$data->id) }}" title="Generate Invoice" class="btn btn-sm btn-success view"><span class="hidden-xs hidden-sm">Generate Invoice</span>
                                             </a>
                                         </td>
                                     </tr>

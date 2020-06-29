@@ -29,7 +29,7 @@ class InvoiceController extends \TCG\Voyager\Http\Controllers\VoyagerBaseControl
      */
     public function store(Request $request)
     {
-        dd($request);
+        // dd($request);
         $slug = $this->getSlug($request);
 
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
@@ -40,6 +40,30 @@ class InvoiceController extends \TCG\Voyager\Http\Controllers\VoyagerBaseControl
         // Validate fields with ajax
         $val = $this->validateBread($request->all(), $dataType->addRows)->validate();
         $data = $this->insertUpdateData($request, $slug, $dataType->addRows, new $dataType->model_name());
+
+        for($i = 0; $i < count($request->get("consignment_no")); $i++){
+
+            $invoiceItem = new \App\InvoiceItem;
+            $invoiceItem->consignment_no = $request->get("consignment_no")[$i];
+            $invoiceItem->refrence_no = $request->get("refrence_no")[$i];
+            $invoiceItem->booking_date = $request->get("booking_date")[$i];
+            $invoiceItem->origin = $request->get("origin")[$i];
+            $invoiceItem->destination = $request->get("destination")[$i];
+            $invoiceItem->zone = $request->get("zone")[$i];
+            $invoiceItem->product = $request->get("product")[$i];
+            $invoiceItem->actual_weight = $request->get("actual_weight")[$i];
+
+            $volumetric_weight = ($request->get("l")[$i] * $request->get("w")[$i] * $request->get("h")[$i]) / 5000;
+
+            $invoiceItem->volumetric_weight = $volumetric_weight;
+            
+            $invoiceItem->chargeable_weight = $request->get("chargeable_weight")[$i];
+            $invoiceItem->amount = $request->get("amount")[$i];
+            $invoiceItem->invoice_customer_id = $data->id;
+
+            $invoiceItem->save();
+
+        }
 
         event(new BreadDataAdded($dataType, $data));
 
@@ -107,6 +131,73 @@ class InvoiceController extends \TCG\Voyager\Http\Controllers\VoyagerBaseControl
 
         $pdf->SetFont('Arial','B',8);
         $pdf->Text(193,218.2,$invoice->net_amount);
+
+        $invoiceItems = \App\InvoiceItem::where("invoice_customer_id",$id)->get();
+
+        for($i = 0; $i < $invoiceItems->count(); $i++){
+            if($i == 0){
+                $pdf->Text(16,117,$invoiceItems[$i]->consignment_no);
+                $pdf->Text(38,117,$invoiceItems[$i]->refrence_no);
+                $pdf->Text(61,117,$invoiceItems[$i]->booking_date);
+                $pdf->Text(79,117,$invoiceItems[$i]->origin);
+                $pdf->Text(95,117,$invoiceItems[$i]->destination);
+                $pdf->Text(114,117,$invoiceItems[$i]->zone);
+                $pdf->Text(124,117,$invoiceItems[$i]->product);
+                $pdf->Text(138,117,$invoiceItems[$i]->actual_weight);
+                $pdf->Text(156,117,$invoiceItems[$i]->volumetric_weight);
+                $pdf->Text(174,117,$invoiceItems[$i]->chargeable_weight);
+                $pdf->Text(194,117,$invoiceItems[$i]->amount);
+            }else if($i == 1){
+                $pdf->Text(16,121,$invoiceItems[$i]->consignment_no);
+                $pdf->Text(38,121,$invoiceItems[$i]->refrence_no);
+                $pdf->Text(61,121,$invoiceItems[$i]->booking_date);
+                $pdf->Text(79,121,$invoiceItems[$i]->origin);
+                $pdf->Text(95,121,$invoiceItems[$i]->destination);
+                $pdf->Text(114,121,$invoiceItems[$i]->zone);
+                $pdf->Text(124,121,$invoiceItems[$i]->product);
+                $pdf->Text(138,121,$invoiceItems[$i]->actual_weight);
+                $pdf->Text(156,121,$invoiceItems[$i]->volumetric_weight);
+                $pdf->Text(174,121,$invoiceItems[$i]->chargeable_weight);
+                $pdf->Text(194,121,$invoiceItems[$i]->amount);
+            }else if($i == 2){
+                $pdf->Text(16,125.5,$invoiceItems[$i]->consignment_no);
+                $pdf->Text(38,125.5,$invoiceItems[$i]->refrence_no);
+                $pdf->Text(61,125.5,$invoiceItems[$i]->booking_date);
+                $pdf->Text(79,125.5,$invoiceItems[$i]->origin);
+                $pdf->Text(95,125.5,$invoiceItems[$i]->destination);
+                $pdf->Text(114,125.5,$invoiceItems[$i]->zone);
+                $pdf->Text(124,125.5,$invoiceItems[$i]->product);
+                $pdf->Text(138,125.5,$invoiceItems[$i]->actual_weight);
+                $pdf->Text(156,125.5,$invoiceItems[$i]->volumetric_weight);
+                $pdf->Text(174,125.5,$invoiceItems[$i]->chargeable_weight);
+                $pdf->Text(194,125.5,$invoiceItems[$i]->amount);
+            }else if($i == 3){
+                $pdf->Text(16,129.3,$invoiceItems[$i]->consignment_no);
+                $pdf->Text(38,129.3,$invoiceItems[$i]->refrence_no);
+                $pdf->Text(61,129.3,$invoiceItems[$i]->booking_date);
+                $pdf->Text(79,129.3,$invoiceItems[$i]->origin);
+                $pdf->Text(95,129.3,$invoiceItems[$i]->destination);
+                $pdf->Text(114,129.3,$invoiceItems[$i]->zone);
+                $pdf->Text(124,129.3,$invoiceItems[$i]->product);
+                $pdf->Text(138,129.3,$invoiceItems[$i]->actual_weight);
+                $pdf->Text(156,129.3,$invoiceItems[$i]->volumetric_weight);
+                $pdf->Text(174,129.3,$invoiceItems[$i]->chargeable_weight);
+                $pdf->Text(194,129.3,$invoiceItems[$i]->amount);
+            }
+            else if($i == 4){
+                $pdf->Text(16,132.5,$invoiceItems[$i]->consignment_no);
+                $pdf->Text(38,132.5,$invoiceItems[$i]->refrence_no);
+                $pdf->Text(61,132.5,$invoiceItems[$i]->booking_date);
+                $pdf->Text(79,132.5,$invoiceItems[$i]->origin);
+                $pdf->Text(95,132.5,$invoiceItems[$i]->destination);
+                $pdf->Text(114,132.5,$invoiceItems[$i]->zone);
+                $pdf->Text(124,132.5,$invoiceItems[$i]->product);
+                $pdf->Text(138,132.5,$invoiceItems[$i]->actual_weight);
+                $pdf->Text(156,132.5,$invoiceItems[$i]->volumetric_weight);
+                $pdf->Text(174,132.5,$invoiceItems[$i]->chargeable_weight);
+                $pdf->Text(194,132.5,$invoiceItems[$i]->amount);
+            }
+        }
 
         $pdf->Output();
         
@@ -203,6 +294,38 @@ class InvoiceController extends \TCG\Voyager\Http\Controllers\VoyagerBaseControl
         //Delivery Contact Mobile
         $pdf->Text(111,122.3,$docket->deliveryAddress->phone);
 
+        $pdf->SetFont('Arial','B',10);
+
+        //Service
+        if($docket->service === "Express"){
+            $pdf->Text(197.3,98.5,"X");
+        }
+
+        if($docket->service === "Economy"){
+            $pdf->Text(197.3,103.4,"X");
+        }
+
+        if($docket->service === "Cargo"){
+            $pdf->Text(197.3,108,"X");
+        }
+
+        if($docket->service === "D to D"){
+            $pdf->Text(197.3,113,"X");
+        }
+
+        if($docket->service === "D to P"){
+            $pdf->Text(197.3,118,"X");
+        }
+
+        if($docket->service === "P to P"){
+            $pdf->Text(197.3,122.5,"X");
+        }
+
+        if($docket->service === "P to D"){
+            $pdf->Text(197.3,127.5,"X");
+        }
+
+        $pdf->SetFont('Arial','B',8);
         $total = 0;
         // $volumns->count()
 
@@ -248,8 +371,12 @@ class InvoiceController extends \TCG\Voyager\Http\Controllers\VoyagerBaseControl
             }
         }
 
+
+
         //Line Total
-        // $pdf->Text(153,162,"Description"); //description
+        $pdf->Text(30,138,"Total Amount : "); //description
+        $pdf->Text(90,138,"Gross Amount : "); //description
+
         $pdf->Text(198.5,181.7,$total); //total
         $pdf->Text(241.8,169.5,""); //volumn
 

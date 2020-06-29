@@ -27,4 +27,16 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('invoices','DocketController@invoices');
     Route::get('download','PriceController@download');
     Route::get('generate/invoice/{id}','InvoiceController@generateInvoice');
+
+    Route::post('amount', function (Illuminate\Http\Request $request) {
+        $type = $request->get("type");
+        $zone = $request->get("zone");
+        $weight = $request->get("weight");
+
+        $amount = \App\Price::where("weight",$weight)->where("zone",$zone)->where("type",$type)->first();
+
+        return response()->json([
+            $amount
+        ]);
+    });
 });
